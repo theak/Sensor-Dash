@@ -1,0 +1,174 @@
+/* Small overrides on top of Pico (which is forced to dark via <html data-theme="dark">). */
+
+:root {
+  --pico-font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --accent: #4f8cff;
+  --danger: #e5484d;
+}
+
+body {
+  padding-block: 2rem;
+}
+
+.subtitle {
+  color: var(--pico-muted-color);
+}
+
+/* Homepage device list */
+.device-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1rem;
+}
+/* Space between the devices list and the New device card below it */
+.device-list + article {
+  margin-top: 2rem;
+}
+
+/* Status messages (Loading…, empty note, errors) span the full grid row */
+.device-list > p {
+  grid-column: 1 / -1;
+  margin: 0;
+}
+.device-list .empty-note {
+  white-space: nowrap;
+}
+a.device-tile {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  margin: 0;
+}
+a.device-tile:hover {
+  border-color: var(--accent);
+}
+.device-tile h3 {
+  margin-bottom: 0.25rem;
+  word-break: break-all;
+}
+.device-tile .meta {
+  color: var(--pico-muted-color);
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+/* Device page: one card per sensor */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 1rem;
+}
+.sensor-card {
+  margin: 0;
+}
+.sensor-card header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.sensor-card .sensor-name {
+  font-weight: 600;
+  word-break: break-all;
+}
+.sensor-card .value {
+  font-variant-numeric: tabular-nums;
+  font-size: 1.9rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--accent);
+}
+.sensor-card .chart {
+  width: 100%;
+}
+.sensor-card .updated {
+  display: block;
+  margin-top: 0.4rem;
+  text-align: right;
+}
+
+/* "How to push a reading" disclosure: chevron next to the text, breathing room above */
+#howto {
+  margin-top: 1.75rem;
+}
+#howto > summary {
+  display: inline-flex;
+  align-items: center;
+  width: auto;
+}
+
+/* Device page header: back link + device name stacked on the left, delete on the right */
+.device-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+.device-head h2 {
+  margin: 0.35rem 0 0;
+  word-break: break-all;
+}
+
+/* Danger button for deleting a device (device page nav) */
+.delete-btn {
+  width: auto;
+  margin: 0;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.85rem;
+  color: var(--danger);
+  background: transparent;
+  border-color: var(--danger);
+}
+.delete-btn:hover {
+  color: #fff;
+  background: var(--danger);
+  border-color: var(--danger);
+}
+
+.muted {
+  color: var(--pico-muted-color);
+}
+.msg {
+  margin-top: 0.5rem;
+}
+.msg.error {
+  color: var(--pico-del-color, var(--danger));
+}
+.msg.ok {
+  color: var(--pico-ins-color, #2f9e44);
+}
+
+/* Copy button pinned to the top-right of a code block (the only place we use <pre>) */
+.code-block {
+  position: relative;
+}
+.code-block pre {
+  margin: 0;
+  white-space: pre-wrap;
+  /* Keep wrapped text clear of the absolutely-positioned Copy button */
+  padding-right: 4.75rem;
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
+.copy-btn {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  width: auto;
+  margin: 0;
+  padding: 0.2rem 0.6rem;
+  font-size: 0.8rem;
+}
+
+/* uPlot dark legibility (axis strokes are set in JS; these cover text bits). */
+.uplot,
+.uplot .u-title,
+.uplot .u-legend {
+  color: var(--pico-color);
+  font-family: var(--pico-font-family);
+}
+.uplot .u-legend {
+  font-size: 0.8rem;
+}

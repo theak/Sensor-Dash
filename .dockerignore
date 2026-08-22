@@ -1,0 +1,10 @@
+target
+data
+*.db
+*.db-wal
+*.db-shm
+.git
+.github
+.gitignore
+README.md
+docker-compose.yml

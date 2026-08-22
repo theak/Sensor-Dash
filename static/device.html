@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sensor Dash: device</title>
+  <link rel="icon" href="/static/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="/static/pico.min.css" />
+  <link rel="stylesheet" href="/static/uplot.min.css" />
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body data-page="device">
+  <main class="container">
+    <header class="device-head">
+      <div>
+        <a href="/">← devices</a>
+        <h2 id="device-title" class="muted">…</h2>
+      </div>
+      <button id="delete-device" class="delete-btn" hidden>Delete device</button>
+    </header>
+
+    <!-- Shown when the device name in the URL doesn't exist. -->
+    <article id="notfound" hidden>
+      <header>Device not found</header>
+      <p>There's no device named <strong id="notfound-name"></strong> yet.
+        <a href="/">Create it on the home page</a> first.</p>
+    </article>
+
+    <!-- Empty (0-state) quickstart, shown when the device has no readings yet. -->
+    <article id="empty" hidden>
+      <header>No readings yet</header>
+      <p>Post your first reading. Sensors are created automatically on first post:</p>
+      <div class="code-block">
+        <pre><code id="quickstart"></code></pre>
+        <button type="button" class="copy-btn secondary outline" data-copy="quickstart">Copy</button>
+      </div>
+      <p><small class="muted"><span id="replace-note">Replace <code>YOUR_KEY</code> with one
+        of your write keys. </span>Change <code>temperature</code> to any sensor name;
+        values must be numeric.</small></p>
+    </article>
+
+    <div id="charts" class="cards"></div>
+
+    <details id="howto" hidden>
+      <summary>How to push a reading</summary>
+      <div class="code-block">
+        <pre><code id="quickstart2"></code></pre>
+        <button type="button" class="copy-btn secondary outline" data-copy="quickstart2">Copy</button>
+      </div>
+    </details>
+  </main>
+
+  <script src="/static/uplot.min.js"></script>
+  <script src="/static/app.js"></script>
+</body>
+</html>

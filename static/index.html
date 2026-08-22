@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sensor Dash</title>
+  <link rel="icon" href="/static/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="/static/pico.min.css" />
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <main class="container">
+    <hgroup>
+      <h5>Sensor Dash</h5>
+      <p class="subtitle">Push numeric sensor readings over HTTP and watch them as timeseries.</p>
+    </hgroup>
+
+    <h2>Devices</h2>
+    <div id="devices" class="device-list">
+      <p class="muted">Loading…</p>
+    </div>
+
+    <article>
+      <header>New device</header>
+      <form id="create-form">
+        <fieldset role="group">
+          <input id="device-name" name="device" placeholder="device name (e.g. garage)"
+                 pattern="[A-Za-z0-9 _\-]{1,64}" autocomplete="off" required />
+          <button type="submit">Create</button>
+        </fieldset>
+      </form>
+      <details>
+        <summary>Write key</summary>
+        <input id="write-key" type="password" autocomplete="off"
+               placeholder="X-API-Key — needed to create devices &amp; post readings" />
+        <small class="muted">Stored only in this browser (localStorage). Set with the
+          <code>WRITE_KEYS</code> env var on the server.</small>
+      </details>
+      <p id="create-msg" class="msg" hidden></p>
+    </article>
+  </main>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

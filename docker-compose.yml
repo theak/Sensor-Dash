@@ -1,0 +1,16 @@
+services:
+  sensordash:
+    image: akshaykannan/sensordash
+    # To build locally instead of pulling from Docker Hub, uncomment:
+    # build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./data:/data
+    environment:
+      # Named write keys: "name:secret,name2:secret2". Revoke/rotate by editing
+      # this and re-deploying. Keep the real value out of git (use an .env file).
+      - WRITE_KEYS=${WRITE_KEYS}
+      # Optional: prune readings older than N days.
+      # - RETENTION_DAYS=90
+    restart: unless-stopped
