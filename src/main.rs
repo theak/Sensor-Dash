@@ -80,6 +80,21 @@ pub fn build_router(state: AppState) -> Router {
 
 #[tokio::main]
 async fn main() {
+    // `healthcheck` subcommand: TCP-connect to our own port, exit 0/1 (for scratch, no curl).
+    if std::env::args().nth(1).as_deref() == Some("healthcheck") {
+        let port: u16 = std::env::var("PORT")
+            .ok()
+            .and_then(|s| s.parse().ok())
+            .unwrap_or(8000);
+        let ok = tokio::time::timeout(
+            Duration::from_secs(5),
+            tokio::net::TcpStream::connect(("127.0.0.1", port)),
+        )
+        .await
+        .is_ok_and(|r| r.is_ok());
+        std::process::exit(if ok { 0 } else { 1 });
+    }
+
     let keys = parse_keys(&std::env::var("WRITE_KEYS").unwrap_or_default());
     if keys.is_empty() {
         eprintln!(

@@ -15,4 +15,6 @@ ENV DB_PATH=/data/sensors.db
 ENV PORT=8000
 EXPOSE 8000
 VOLUME ["/data"]
+HEALTHCHECK --interval=5m --timeout=10s --start-period=1m --retries=3 \
+    CMD ["/sensordash", "healthcheck"]
 ENTRYPOINT ["/sensordash"]
