@@ -102,7 +102,7 @@ async function initDevice() {
   const name = decodeURIComponent(location.pathname.split("/").pop() || "");
   document.getElementById("device-title").textContent = name;
   document.getElementById("device-title").classList.remove("muted");
-  document.title = "SensorDash — " + name;
+  document.title = "Sensor Dashboard — " + name;
 
   // If the write key is already saved in this browser, drop it straight into the
   // command so it's copy-paste ready; otherwise leave a YOUR_KEY placeholder.

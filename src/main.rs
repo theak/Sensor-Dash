@@ -1,4 +1,4 @@
-//! SensorDash — a minimal push-based sensor timeseries app.
+//! Sensor Dashboard — a minimal push-based sensor timeseries app.
 //!
 //! Ingest:  POST /update_sensor/{device}/{sensor}  (body = numeric value)  [write key]
 //! View:    GET  /  and  /device/{name}                                    [public]
@@ -90,7 +90,7 @@ async fn main() {
     }
     let key_names: Vec<&str> = keys.iter().map(|k| k.name.as_str()).collect();
     eprintln!(
-        "sensordash: loaded {} write key(s): {}",
+        "sensor-dashboard: loaded {} write key(s): {}",
         keys.len(),
         key_names.join(", ")
     );
@@ -108,7 +108,7 @@ async fn main() {
         .and_then(|s| s.parse::<i64>().ok())
         .filter(|d| *d > 0)
     {
-        eprintln!("sensordash: retention enabled — keeping {days} day(s) of readings");
+        eprintln!("sensor-dashboard: retention enabled — keeping {days} day(s) of readings");
         let db = state.db.clone();
         tokio::spawn(async move {
             let mut ticker = tokio::time::interval(Duration::from_secs(24 * 3600));
@@ -147,7 +147,7 @@ async fn main() {
     let listener = tokio::net::TcpListener::bind(addr)
         .await
         .unwrap_or_else(|e| panic!("failed to bind {addr}: {e}"));
-    eprintln!("sensordash: listening on http://{addr}  (db: {db_path})");
+    eprintln!("sensor-dashboard: listening on http://{addr}  (db: {db_path})");
 
     axum::serve(
         listener,

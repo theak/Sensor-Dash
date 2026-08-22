@@ -1,4 +1,4 @@
-# Sensor Dash
+# Sensor Dashboard
 
 A dirt-simple, self-hostable app to **push numeric sensor readings over HTTP** and
 visualize the data as **timeseries charts**. One small Rust binary + a SQLite file, shipped as
